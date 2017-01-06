@@ -10,3 +10,6 @@ docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
 
 docker tag winspector stefanscherer/winspector:$env:APPVEYOR_REPO_TAG_NAME
 docker tag winspector stefanscherer/winspector:latest
+
+docker push stefanscherer/winspector:$env:APPVEYOR_REPO_TAG_NAME
+docker push stefanscherer/winspector:latest
