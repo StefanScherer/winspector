@@ -1,0 +1,18 @@
+version: 1.0.{build}
+environment:
+  DOCKER_USER:
+    secure: LjNiW/ZWrfVIJn3Mc9foeg==
+  DOCKER_PASS:
+    secure: DWlZYy4BAD1B2oovKAqeUQc8N1fNtr78Yd/hwX6AwQrqCHnyC+Tt/SjjzeWEje0P
+install:
+  - choco install -y docker -pre
+  - docker version
+
+build_script:
+  - ps: .\build.ps1
+
+test_script:
+  - ps: .\test.ps1
+
+deploy_script:
+  - ps: .\deploy.ps1

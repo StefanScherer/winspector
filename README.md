@@ -1,4 +1,4 @@
-[![This image on DockerHub](https://img.shields.io/docker/pulls/stefanscherer/winspector.svg)](https://hub.docker.com/r/stefanscherer/winspector/)
+[![This image on DockerHub](https://img.shields.io/docker/pulls/stefanscherer/winspector.svg)](https://hub.docker.com/r/stefanscherer/winspector/) [![Build status](https://ci.appveyor.com/api/projects/status/9nw1nk799cqtmdw2/branch/master?svg=true)](https://ci.appveyor.com/project/StefanScherer/winspector/branch/master) [![Build Status](https://travis-ci.org/StefanScherer/winspector.svg?branch=master)](https://travis-ci.org/StefanScherer/winspector)
 
 # Winspector - a Windows Docker Image Inspector
 
