@@ -3,7 +3,7 @@ import json
 import sys
 from requests.exceptions import HTTPError, ConnectTimeout
 
-windowsImages = {
+knownWindowsLayers = {
     "sha256:3889bb8d808bbae6fa5a33e07093e65c31371bcf9e4c38c21be6b9af52ad1548": "microsoft/windowsservercore:10.0.14393.576 update",
     "sha256:04ee5d718c7adc0144556d740900f778129e41be806c95191710d1d92051a7b3": "microsoft/windowsservercore:10.0.14393.576 base",
     "sha256:d33fff6043a134da85e10360f9932543f1dfc0c3a22e1edd062aa9b088a86c5b": "microsoft/windowsservercore:10.0.14393.447 update",
@@ -55,6 +55,7 @@ class DockerImageInspector(object):
         r = requests.get(url, headers=headers, timeout=(3.05,10))
         r.raise_for_status()
         self.manifest = r.json()
+        print(self.manifest)
         for l in self.manifest["layers"]:
             self.layers.append(l)
         self.manifest_content_type = r.headers["content-type"]
@@ -139,11 +140,14 @@ if __name__ == "__main__":
     for l in dii.layers:
         print("  %s - %s byte" % (l["digest"], l["size"]))
         totalSize += l["size"]
-        if l["digest"] not in windowsImages:
+        if l["mediaType"] != "application/vnd.docker.image.rootfs.foreign.diff.tar.gzip":
             appSize += l["size"]
     print("Total size (including Windows base layers): %s byte" % totalSize)
     print("Application size (w/o Windows base layers): %s byte" % appSize)
     print("Windows base image used:")
     for l in dii.layers:
-        if l["digest"] in windowsImages:
-            print("  %s" % windowsImages[l["digest"]])
+        if l["mediaType"] == "application/vnd.docker.image.rootfs.foreign.diff.tar.gzip":
+            if l["digest"] in knownWindowsLayers:
+                print("  %s" % knownWindowsLayers[l["digest"]])
+            else:
+                print("  %s - unknown Windows layer" % l["digest"])
