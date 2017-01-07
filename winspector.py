@@ -1,5 +1,7 @@
-import requests
+import dateutil.parser
 import json
+import re
+import requests
 import sys
 from requests.exceptions import HTTPError, ConnectTimeout
 
@@ -27,6 +29,9 @@ class DockerImageInspector(object):
         self.token = None
         self.tag = tag
         self.create_date = None
+        self.create_os = None
+        self.create_docker_version = None
+        self.create_os_version = ""
         self.layers = []
         self.tags = []
         self.manifest = None
@@ -49,17 +54,28 @@ class DockerImageInspector(object):
                 base_url=self.base_url,
                 name=self.repository_name,
                 reference=self.tag)
-        headers = {
-            "Accept": "application/vnd.docker.distribution.manifest.v2+json"
-        }
+        headers = {}
         if self.token is not None:
             headers["Authorization"] = "Bearer %s" % self.token
         r = requests.get(url, headers=headers, timeout=(3.05,10))
         r.raise_for_status()
         self.manifest = r.json()
+        if "history" in self.manifest:
+            if "v1Compatibility" in self.manifest["history"][0]:
+                hist = json.loads(self.manifest["history"][0]["v1Compatibility"])
+                self.create_date = dateutil.parser.parse(hist["created"])
+                self.create_os = hist["os"]
+                if "os.version" in hist:
+                    self.create_os_version = hist["os.version"]
+                self.create_docker_version = hist["docker_version"]
+        self.manifest_content_type = r.headers["content-type"]
+        headers["Accept"] = "application/vnd.docker.distribution.manifest.v2+json"
+        r = requests.get(url, headers=headers, timeout=(3.05,10))
+        r.raise_for_status()
+        manifest = r.json()
+        self.manifest["layers"] = manifest["layers"]
         for l in self.manifest["layers"]:
             self.layers.append(l)
-        self.manifest_content_type = r.headers["content-type"]
 
 
 class DockerHubImageInspector(DockerImageInspector):
@@ -72,6 +88,7 @@ class DockerHubImageInspector(DockerImageInspector):
         self.layers = []
         self.tags = []
         self.manifest = None
+        self.create_os_version = ""
         self.get_tags()
         self.get_manifest()
 
@@ -135,6 +152,10 @@ if __name__ == "__main__":
     print("Image name: %s" % dii.repository_name)
     print("Tag: %s" % dii.tag)
     print("Number of layers: %d" % len(dii.layers))
+    print("Schema version: %s" % dii.manifest["schemaVersion"])
+    print("Architecture: %s" % dii.manifest["architecture"])
+    print("Number of history entries: %d" % len(dii.manifest["history"]))
+    print("Created: %s with Docker %s on %s %s" % (dii.create_date.strftime("%Y-%m-%d %H:%M:%S"), dii.create_docker_version, dii.create_os, dii.create_os_version))
     totalSize=0
     appSize=0
     print("Sizes of layers:")
@@ -146,9 +167,23 @@ if __name__ == "__main__":
     print("Total size (including Windows base layers): %s byte" % totalSize)
     print("Application size (w/o Windows base layers): %s byte" % appSize)
     print("Windows base image used:")
+    if dii.create_os != "windows":
+        print("  It does not seem to be a Windows image")
     for l in dii.layers:
         if l["mediaType"] == "application/vnd.docker.image.rootfs.foreign.diff.tar.gzip":
             if l["digest"] in knownWindowsLayers:
                 print("  %s" % knownWindowsLayers[l["digest"]])
             else:
                 print("  %s - unknown Windows layer" % l["digest"])
+    print("History:")
+    for h in reversed(dii.manifest["history"]):
+        hist = json.loads(h["v1Compatibility"])["container_config"]
+        if "(nop)" in json.dumps(hist["Cmd"]):
+            cmd = hist["Cmd"][-1]
+            cmd = re.sub(r".*\(nop\)\s*", "", cmd)
+            if "(nop)" in hist["Cmd"][-1]:
+                print("  %s" % cmd)
+            else:
+                print("  %s" % cmd)
+        else:
+            print("  RUN %s" % json.dumps(hist["Cmd"]))
