@@ -55,7 +55,6 @@ class DockerImageInspector(object):
         r = requests.get(url, headers=headers, timeout=(3.05,10))
         r.raise_for_status()
         self.manifest = r.json()
-        print(self.manifest)
         for l in self.manifest["layers"]:
             self.layers.append(l)
         self.manifest_content_type = r.headers["content-type"]
