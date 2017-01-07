@@ -57,18 +57,23 @@ class DockerImageInspector(object):
         headers = {}
         if self.token is not None:
             headers["Authorization"] = "Bearer %s" % self.token
-        r = requests.get(url, headers=headers, timeout=(3.05,10))
-        r.raise_for_status()
-        self.manifest = r.json()
-        if "history" in self.manifest:
-            if "v1Compatibility" in self.manifest["history"][0]:
-                hist = json.loads(self.manifest["history"][0]["v1Compatibility"])
-                self.create_date = dateutil.parser.parse(hist["created"])
-                self.create_os = hist["os"]
-                if "os.version" in hist:
-                    self.create_os_version = hist["os.version"]
-                self.create_docker_version = hist["docker_version"]
-        self.manifest_content_type = r.headers["content-type"]
+        try:
+            r = requests.get(url, headers=headers, timeout=(3.05,10))
+            r.raise_for_status()
+            self.manifest = r.json()
+            if "history" in self.manifest:
+                if "v1Compatibility" in self.manifest["history"][0]:
+                    hist = json.loads(self.manifest["history"][0]["v1Compatibility"])
+                    self.create_date = dateutil.parser.parse(hist["created"])
+                    self.create_os = hist["os"]
+                    if "os.version" in hist:
+                        self.create_os_version = hist["os.version"]
+                    self.create_docker_version = hist["docker_version"]
+            self.manifest_content_type = r.headers["content-type"]
+        except:
+            # seems we directly check a Windows base image
+            self.manifest = {}
+            self.create_os = "windows"
         headers["Accept"] = "application/vnd.docker.distribution.manifest.v2+json"
         r = requests.get(url, headers=headers, timeout=(3.05,10))
         r.raise_for_status()
@@ -152,10 +157,10 @@ if __name__ == "__main__":
     print("Image name: %s" % dii.repository_name)
     print("Tag: %s" % dii.tag)
     print("Number of layers: %d" % len(dii.layers))
-    print("Schema version: %s" % dii.manifest["schemaVersion"])
-    print("Architecture: %s" % dii.manifest["architecture"])
-    print("Number of history entries: %d" % len(dii.manifest["history"]))
-    print("Created: %s with Docker %s on %s %s" % (dii.create_date.strftime("%Y-%m-%d %H:%M:%S"), dii.create_docker_version, dii.create_os, dii.create_os_version))
+    if "schemaVersion" in dii.manifest:
+        print("Schema version: %s" % dii.manifest["schemaVersion"])
+        print("Architecture: %s" % dii.manifest["architecture"])
+        print("Created: %s with Docker %s on %s %s" % (dii.create_date.strftime("%Y-%m-%d %H:%M:%S"), dii.create_docker_version, dii.create_os, dii.create_os_version))
     totalSize=0
     appSize=0
     print("Sizes of layers:")
@@ -175,15 +180,16 @@ if __name__ == "__main__":
                 print("  %s" % knownWindowsLayers[l["digest"]])
             else:
                 print("  %s - unknown Windows layer" % l["digest"])
-    print("History:")
-    for h in reversed(dii.manifest["history"]):
-        hist = json.loads(h["v1Compatibility"])["container_config"]
-        if "(nop)" in json.dumps(hist["Cmd"]):
-            cmd = hist["Cmd"][-1]
-            cmd = re.sub(r".*\(nop\)\s*", "", cmd)
-            if "(nop)" in hist["Cmd"][-1]:
-                print("  %s" % cmd)
+    if "history" in dii.manifest:
+        print("History:")
+        for h in reversed(dii.manifest["history"]):
+            hist = json.loads(h["v1Compatibility"])["container_config"]
+            if "(nop)" in json.dumps(hist["Cmd"]):
+                cmd = hist["Cmd"][-1]
+                cmd = re.sub(r".*\(nop\)\s*", "", cmd)
+                if "(nop)" in hist["Cmd"][-1]:
+                    print("  %s" % cmd)
+                else:
+                    print("  %s" % cmd)
             else:
-                print("  %s" % cmd)
-        else:
-            print("  RUN %s" % json.dumps(hist["Cmd"]))
+                print("  RUN %s" % json.dumps(hist["Cmd"]))
