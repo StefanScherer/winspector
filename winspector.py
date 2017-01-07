@@ -9,12 +9,14 @@ knownWindowsLayers = {
     "sha256:d33fff6043a134da85e10360f9932543f1dfc0c3a22e1edd062aa9b088a86c5b": "microsoft/windowsservercore:10.0.14393.447 update",
     "sha256:de5064718b3f2749727c8b5ffddf2da7698189277afe0df6fc0a57ad573bca0f": "microsoft/windowsservercore:10.0.14393.321 update",
     "sha256:9c7f9c7d9bc2915388ecc5d08e89a7583658285469d7325281f95d8ee279cc60": "microsoft/windowsservercore:10.0.14393.206 base",
+    "sha256:1239394e5a8ab79fbd3b751dc5d98decf5886f14339958fdf5c1f96c89da58a7": "microsoft/windowsservercore:10.0.14300.1030",
 
     "sha256:10bf725c5388a1909f7184467b5ec75dbad3ece68508aa5fa4074baa0b20cc6f": "microsoft/nanoserver:10.0.14393.576 update",
     "sha256:bce2fbc256ea437a87dadac2f69aabd25bed4f56255549090056c1131fad0277": "microsoft/nanoserver:10.0.14393.576 base",
     "sha256:482ab31872a23b32cbdeca13edb7a0b97290714c0b5edcce96fbb3e34221ea91": "microsoft/nanoserver:10.0.14393.447 update",
     "sha256:94b4ce7ac4c7c7d4ed75ac2bd9359a87204ad2d5a909759d8e77953874d8e7c2": "microsoft/nanoserver:10.0.14393.321 update",
     "sha256:5496abde368a3dd39999745bf998c877ddc6a390a943bc3fd99ffaabf728ed88": "microsoft/nanoserver:10.0.14393.206 base",
+    "sha256:cf62dbf6d334601f3e026a976218e4d73641ab8c3e66a842a4e4dbdc72768b18": "microsoft/nanoserver:10.0.14300.1030",
 }
 
 class DockerImageInspector(object):
