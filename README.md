@@ -26,7 +26,7 @@ See below for example output.
 Set up your python environment for development like this:
 
 ```nohighlight
-git clone https://github.com/StefanScherer/wininspector.git
+git clone https://github.com/StefanScherer/winspector.git
 cd winspector/
 virtualenv venv
 source venv/bin/activate
