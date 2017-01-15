@@ -1,4 +1,4 @@
-FROM python:2.7-alpine
+FROM python:3.6.0
 ENV PYTHON_UNBUFFERED 1
 RUN pip install --upgrade pip
 ADD requirements.txt /

@@ -146,13 +146,13 @@ if __name__ == "__main__":
             dii = DockerHubImageInspector(namespace + "/" + repository, tag)
         else:
             dii = DockerImageInspector(registry, namespace + "/" + repository, tag)
-    except HTTPError, e:
+    except HTTPError as e:
         sys.stderr.write(str(e) + "\n")
         sys.exit(1)
-    except ConnectTimeout, e:
+    except ConnectTimeout as e:
         sys.stderr.write(str(e) + "\n")
         sys.exit(2)
-    except Exception, e:
+    except Exception as e:
         sys.stderr.write("Unknown error: " + str(e) + "\n")
         sys.exit(3)
 
