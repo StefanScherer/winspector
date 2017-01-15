@@ -8,8 +8,6 @@ if (! (Test-Path Env:\APPVEYOR_REPO_TAG_NAME)) {
 Write-Host Starting deploy
 docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
 
-docker tag winspector stefanscherer/winspector:$env:APPVEYOR_REPO_TAG_NAME
-docker tag winspector stefanscherer/winspector:latest
+docker tag winspector stefanscherer/winspector:windows-$env:APPVEYOR_REPO_TAG_NAME
 
-docker push stefanscherer/winspector:$env:APPVEYOR_REPO_TAG_NAME
-docker push stefanscherer/winspector:latest
+docker push stefanscherer/winspector:windows-$env:APPVEYOR_REPO_TAG_NAME
