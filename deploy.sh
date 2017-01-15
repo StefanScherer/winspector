@@ -22,11 +22,11 @@ chmod +x manifest-tool
 echo "Pushing manifest stefanscherer/winspector:$TRAVIS_TAG"
 ./manifest-tool push from-args \
   --platforms linux/amd64,windows/amd64 \
-  --template stefanscherer/winspector:ARCH-$TRAVIS_TAG \
+  --template stefanscherer/winspector:OS-$TRAVIS_TAG \
   --target stefanscherer/winspector:$TRAVIS_TAG
 
 echo "Pushing manifest stefanscherer/winspector:latest"
 ./manifest-tool push from-args \
   --platforms linux/amd64,windows/amd64 \
-  --template stefanscherer/winspector:ARCH-$TRAVIS_TAG \
+  --template stefanscherer/winspector:OS-$TRAVIS_TAG \
   --target stefanscherer/winspector:latest
