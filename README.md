@@ -8,10 +8,7 @@ Derived work from https://github.com/giantswarm/inspect-docker-image, thanks Gia
 
 ## Running the CLI
 
-A public Docker image is available:
-
-  * `stefanscherer/winspector` for Windows Docker engines
-  * `stefanscherer/winspector:linux` for Linux Docker engines
+A public Docker image `stefanscherer/winspector` is available for Linux and Windows Docker engines. Docker will download the right version for you automatically.
 
 Execute, to fetch info on `golang:1.8-nanoserver`, for example:
 
