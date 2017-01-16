@@ -2,7 +2,7 @@
 
 # Winspector - a Windows Docker Image Inspector
 
-A little utility to fetch info on a particular Windows Docker image from the public Docker registry.
+A little utility to fetch info on a particular Windows Docker image from the public Docker registry. See also the blog post https://stefanscherer.github.io/winspector/
 
 Derived work from https://github.com/giantswarm/inspect-docker-image, thanks Giant Swarm!
 
