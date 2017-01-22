@@ -15,7 +15,8 @@ done
 set -e
 
 echo "Downloading manifest-tool"
-wget https://github.com/luxas/manifest-tool/releases/download/v0.3.0/manifest-tool
+wget https://github.com/estesp/manifest-tool/releases/download/v0.3.0/manifest-tool-amd64-linux
+mv manifest-tool-amd64-linux manifest-tool
 chmod +x manifest-tool
 ./manifest-tool
 
