@@ -1,4 +1,4 @@
-FROM stefanscherer/python-windows:3.6.0-nano
+FROM stefanscherer/python-windows:3.6.1-nano
 ENV PYTHON_UNBUFFERED 1
 RUN pip install --upgrade pip
 ADD requirements.txt /
