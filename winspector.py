@@ -6,6 +6,7 @@ import sys
 from requests.exceptions import HTTPError, ConnectTimeout
 
 knownWindowsLayers = {
+    "sha256:423d66441981dd92835b658b5f8f6e300d5af455e5de3d824889c732b9ea03b5": "microsoft/windowsservercore:10.0.14393.1358 update",
     "sha256:1a106d48ef90b8891090e7d056144d20cfb6672acff25a4d3e27ecb53e04afbc": "microsoft/windowsservercore:10.0.14393.1198 update",
     "sha256:6d4d50238ed13902c153bc3efc3a22f8a96bca4168ea03624d01da1063728dc2": "microsoft/windowsservercore:10.0.14393.1066 update",
     "sha256:503d87f3196a164f17f7b7c68b76271330e21a7e4fbefd1a578b327ed102258e": "microsoft/windowsservercore:10.0.14393.953 update",
@@ -17,6 +18,7 @@ knownWindowsLayers = {
     "sha256:9c7f9c7d9bc2915388ecc5d08e89a7583658285469d7325281f95d8ee279cc60": "microsoft/windowsservercore:10.0.14393.206 full",
     "sha256:1239394e5a8ab79fbd3b751dc5d98decf5886f14339958fdf5c1f96c89da58a7": "microsoft/windowsservercore:10.0.14300.1030",
 
+    "sha256:6330793656b1565cd8b5d5c1e2a736a351dec39f7250daf31eb91e3a76cc872b": "microsoft/nanoserver:10.0.14393.1358 update",
     "sha256:4a8c367fd46d2e2da2a8b0fa02158540e13b3a9015daf9f17d1af354a591492f": "microsoft/nanoserver:10.0.14393.1198 update",
     "sha256:6a43ac69611f40511708beba10dfe6fbe3e266ca933b6fd49c87a9f31f46f46c": "microsoft/nanoserver:10.0.14393.1066 update",
     "sha256:58f68fa0ceda734a980c12dedf782342f892e218bba3c74ded58bfabed652ba1": "microsoft/nanoserver:10.0.14393.953 update",
