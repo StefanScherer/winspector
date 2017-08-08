@@ -35,6 +35,8 @@ knownWindowsLayers = {
     "sha256:3631e6c91d014ec27c8f4911389c8fabe66dd62b2df0d9ceb33388f321e1f061": "microsoft/nanoserver-insider:10.0.16237.1001",
     "sha256:279070587260c8f3629decdd22e5e8d2cc43456e9a9a15cf40e5ee27ee61de01": "microsoft/nanoserver-insider-powershell:10.0.16237.1001",
     "sha256:dfb9b801c3addce50d23b0bf3c153e604992f9a881097b2bfbb9f9d69fdc23bb": "microsoft/windowsservercore-insider:10.0.16237.1001",
+    "sha256:89e73aabab6c8b5247bb20c406c1316cef3fc07445dcd569cfb0d101760f256c": "microsoft/windowsservercore-insider:10.0.16257.1000",
+    "sha256:bd0ebd30a0d509ccf4d7ef54855f9468a7207bd63d4350b588ea39ae7402bea5": "microsoft/nanoserver-insider:10.0.16257.1000",
 }
 
 class DockerImageInspector(object):
