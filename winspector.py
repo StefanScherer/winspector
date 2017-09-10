@@ -4,6 +4,7 @@ import re
 import requests
 import sys
 from requests.exceptions import HTTPError, ConnectTimeout
+from os import environ
 
 knownWindowsLayers = {
     "sha256:9f5eeabe6154feaf01ca3bf333d9936a1e0803a4998279a74f27e5012605eff4": "microsoft/windowsservercore:10.0.14393.1593 update",
@@ -34,11 +35,16 @@ knownWindowsLayers = {
     "sha256:5496abde368a3dd39999745bf998c877ddc6a390a943bc3fd99ffaabf728ed88": "microsoft/nanoserver:10.0.14393.206 full",
     "sha256:cf62dbf6d334601f3e026a976218e4d73641ab8c3e66a842a4e4dbdc72768b18": "microsoft/nanoserver:10.0.14300.1030",
 
+
     "sha256:3631e6c91d014ec27c8f4911389c8fabe66dd62b2df0d9ceb33388f321e1f061": "microsoft/nanoserver-insider:10.0.16237.1001",
+    "sha256:bd0ebd30a0d509ccf4d7ef54855f9468a7207bd63d4350b588ea39ae7402bea5": "microsoft/nanoserver-insider:10.0.16257.1000",
+    "sha256:3cda982da924f03f7f053877b8623b1875e156b2e4367b67c97a2d46faf1d31c": "microsoft/nanoserver-insider:10.0.16278.1000",
+
     "sha256:279070587260c8f3629decdd22e5e8d2cc43456e9a9a15cf40e5ee27ee61de01": "microsoft/nanoserver-insider-powershell:10.0.16237.1001",
+
     "sha256:dfb9b801c3addce50d23b0bf3c153e604992f9a881097b2bfbb9f9d69fdc23bb": "microsoft/windowsservercore-insider:10.0.16237.1001",
     "sha256:89e73aabab6c8b5247bb20c406c1316cef3fc07445dcd569cfb0d101760f256c": "microsoft/windowsservercore-insider:10.0.16257.1000",
-    "sha256:bd0ebd30a0d509ccf4d7ef54855f9468a7207bd63d4350b588ea39ae7402bea5": "microsoft/nanoserver-insider:10.0.16257.1000",
+    "sha256:a60e32cc1c9f69e1c3bb5ef1bfdcd5d69ee257cee4b07be2f5815e802444f0c2": "microsoft/windowsservercore-insider:10.0.16278.1000",
 }
 
 class DockerImageInspector(object):
@@ -81,6 +87,8 @@ class DockerImageInspector(object):
             r = requests.get(url, headers=headers, timeout=(3.05,10))
             r.raise_for_status()
             self.manifest = r.json()
+            if environ.get('DEBUG') is not None:
+                print(self.manifest)
             if "history" in self.manifest:
                 if "v1Compatibility" in self.manifest["history"][0]:
                     hist = json.loads(self.manifest["history"][0]["v1Compatibility"])
