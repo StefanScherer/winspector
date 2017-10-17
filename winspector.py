@@ -7,6 +7,9 @@ from requests.exceptions import HTTPError, ConnectTimeout
 from os import environ
 
 knownWindowsLayers = {
+    "sha256:5847a47b8593f7c39aa5e3db09e50b76d42aa8898c0440c70cc9c69747d4c479": "microsoft/windowsservercore:1709 base",
+    "sha256:768182d8a1bb181439f7406a92cfa3d10f2751395fdd954c862ab100f8cde774": "microsoft/windowsservercore:1709_KB4043961",
+
     "sha256:8df8e568af76c1c311a1251f6f7402e2a09d14629840c97091beb9ba55419464": "microsoft/windowsservercore:10.0.14393.1770 update",
     "sha256:da87b55a9b6358a65462540faeaa97505b0a12e1a2c14f08893589181d32d00d": "microsoft/windowsservercore:10.0.14393.1715 update",
     "sha256:9f5eeabe6154feaf01ca3bf333d9936a1e0803a4998279a74f27e5012605eff4": "microsoft/windowsservercore:10.0.14393.1593 update",
@@ -23,6 +26,9 @@ knownWindowsLayers = {
     "sha256:9c7f9c7d9bc2915388ecc5d08e89a7583658285469d7325281f95d8ee279cc60": "microsoft/windowsservercore:10.0.14393.206 full",
     "sha256:1239394e5a8ab79fbd3b751dc5d98decf5886f14339958fdf5c1f96c89da58a7": "microsoft/windowsservercore:10.0.14300.1030",
 
+    "sha256:407ada6e90de9752a53cb9f52b7947a0e38a9b21a349970ace15c68890d72511": "microsoft/nanoserver:1709 base",
+    "sha256:ad09b0550b6c41c96a80f476f16b2ad5160d9c10545a05a73b8eece84b5d9d49": "microsoft/nanoserver:1709_KB4043961",
+
     "sha256:b0b5e40cb939a7befa4e01212d6f65f30022bbd04b5f15985b45ce9cfd3fcabc": "microsoft/nanoserver:10.0.14393.1770 update",
     "sha256:5cd49617cf500abea7b9f47d82b70455d816ae6b497cabc1fc86a9522d19a828": "microsoft/nanoserver:10.0.14393.1715 update",
     "sha256:38cc73423ca1d089e2e2374a8baf65d25d3792b22a22263c702f22f85bea6d4c": "microsoft/nanoserver:10.0.14393.1593 update",
@@ -38,7 +44,6 @@ knownWindowsLayers = {
     "sha256:94b4ce7ac4c7c7d4ed75ac2bd9359a87204ad2d5a909759d8e77953874d8e7c2": "microsoft/nanoserver:10.0.14393.321 update",
     "sha256:5496abde368a3dd39999745bf998c877ddc6a390a943bc3fd99ffaabf728ed88": "microsoft/nanoserver:10.0.14393.206 full",
     "sha256:cf62dbf6d334601f3e026a976218e4d73641ab8c3e66a842a4e4dbdc72768b18": "microsoft/nanoserver:10.0.14300.1030",
-
 
     "sha256:3631e6c91d014ec27c8f4911389c8fabe66dd62b2df0d9ceb33388f321e1f061": "microsoft/nanoserver-insider:10.0.16237.1001",
     "sha256:bd0ebd30a0d509ccf4d7ef54855f9468a7207bd63d4350b588ea39ae7402bea5": "microsoft/nanoserver-insider:10.0.16257.1000",
