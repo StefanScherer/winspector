@@ -2,13 +2,5 @@ $ErrorActionPreference = 'Stop';
 $files = ""
 Write-Host Starting build
 
-Write-Host Preinstalled images
-docker images
-
-# Write-Host Updating base images
-# docker pull microsoft/windowsservercore
-# docker pull microsoft/nanoserver
-
-docker build -t winspector -f Dockerfile.windows .
-
-docker images
+$node="stefanscherer/node-windows:8.6.0-nanoserver"
+docker build -t winspector --build-arg node=$node --build-arg target=$node .
