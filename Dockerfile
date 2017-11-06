@@ -1,7 +1,16 @@
-FROM python:3.6.0-alpine
-ENV PYTHON_UNBUFFERED 1
-RUN pip install --upgrade pip
-ADD requirements.txt /
-RUN pip install -r /requirements.txt
-ADD winspector.py /
-ENTRYPOINT ["python", "/winspector.py"]
+ARG node=node:8.9.0-alpine
+ARG target=node:8.9.0-alpine
+
+FROM $node
+
+WORKDIR /code
+
+COPY package.json package.json
+RUN npm install --production
+
+COPY . .
+
+FROM $target
+COPY --from=0 /code /code
+
+ENTRYPOINT ["node", "/code/index.js"]

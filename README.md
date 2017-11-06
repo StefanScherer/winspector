@@ -20,20 +20,18 @@ See below for example output.
 
 ## Development
 
-Set up your python environment for development like this:
+Set up your Node.js environment for development like this:
 
 ```nohighlight
 git clone https://github.com/StefanScherer/winspector.git
 cd winspector/
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
+npm install
 ```
 
 You can then execute the CLI like this:
 
 ```nohighlight
-python winspector.py golang:1.8-nanoserver
+node index.js golang:1.8-nanoserver
 ```
 
 ## CLI example output

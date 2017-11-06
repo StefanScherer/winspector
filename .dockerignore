@@ -1,2 +1,5 @@
-venv/
-*.pyc
+node_modules
+Dockerfile*
+build*
+test*
+deploy*
