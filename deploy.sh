@@ -28,6 +28,8 @@ chmod +x docker
 
 set -x
 
+image="stefanscherer/winspector
+"
 echo "Pushing manifest $image:$TRAVIS_TAG"
 ./docker manifest create "$image:$TRAVIS_TAG" \
   "$image:linux-$TRAVIS_TAG" \
