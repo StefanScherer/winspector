@@ -1,7 +1,9 @@
 {
   "sha256:5847a47b8593f7c39aa5e3db09e50b76d42aa8898c0440c70cc9c69747d4c479": "microsoft/windowsservercore:1709 base",
   "sha256:768182d8a1bb181439f7406a92cfa3d10f2751395fdd954c862ab100f8cde774": "microsoft/windowsservercore:1709_KB4043961",
+  "sha256:0e0a3062a7ac7e07eda6c54e1ddfafc80550c98dd5e1933799f934bc4bdcf0ab": "microsoft/windowsservercore:1709_KB4048955",
 
+  "sha256:ead9f4ead3c5a712cb213a5318f4a8bf3604bc16e16ce4f7cf0b66f7d2073282": "microsoft/windowsservercore:10.0.14393.1884 update",
   "sha256:8df8e568af76c1c311a1251f6f7402e2a09d14629840c97091beb9ba55419464": "microsoft/windowsservercore:10.0.14393.1770 update",
   "sha256:da87b55a9b6358a65462540faeaa97505b0a12e1a2c14f08893589181d32d00d": "microsoft/windowsservercore:10.0.14393.1715 update",
   "sha256:9f5eeabe6154feaf01ca3bf333d9936a1e0803a4998279a74f27e5012605eff4": "microsoft/windowsservercore:10.0.14393.1593 update",
@@ -20,7 +22,9 @@
 
   "sha256:407ada6e90de9752a53cb9f52b7947a0e38a9b21a349970ace15c68890d72511": "microsoft/nanoserver:1709 base",
   "sha256:ad09b0550b6c41c96a80f476f16b2ad5160d9c10545a05a73b8eece84b5d9d49": "microsoft/nanoserver:1709_KB4043961",
+  "sha256:b7914a074279e6771c0cc3c7adec5267d94f7b13e92dedb272a5515fe5dfdb82": "microsoft/nanoserver:1709_KB4048955",
 
+  "sha256:53a0ccfb7e6fe326c54359c802287bbe5435ac269242e4883f85a1f305e1d0cb": "microsoft/nanoserver:10.0.14393.1884 update",
   "sha256:b0b5e40cb939a7befa4e01212d6f65f30022bbd04b5f15985b45ce9cfd3fcabc": "microsoft/nanoserver:10.0.14393.1770 update",
   "sha256:5cd49617cf500abea7b9f47d82b70455d816ae6b497cabc1fc86a9522d19a828": "microsoft/nanoserver:10.0.14393.1715 update",
   "sha256:38cc73423ca1d089e2e2374a8baf65d25d3792b22a22263c702f22f85bea6d4c": "microsoft/nanoserver:10.0.14393.1593 update",
