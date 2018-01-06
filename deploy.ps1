@@ -16,9 +16,9 @@ docker push stefanscherer/winspector:windows-$version-2016
 npm install -g rebase-docker-image
 rebase-docker-image stefanscherer/winspector:windows-$version-2016 `
   -t stefanscherer/winspector:windows-$version-1709 `
-  -b microsoft/nanoserver:1709
+  -b microsoft/nanoserver:1709_KB4056892
 
 rebase-docker-image stefanscherer/winspector:windows-$version-2016 `
-  -s microsoft/nanoserver:10.0.14393.1884 `
-  -t stefanscherer/winspector:windows-$version-insider-17035 `
-  -b microsoft/nanoserver-insider:10.0.17035.1000
+  -s microsoft/nanoserver:10.0.14393.2007 `
+  -t stefanscherer/winspector:windows-$version-insider-17046 `
+  -b microsoft/nanoserver-insider:10.0.17046.1000

@@ -19,8 +19,8 @@ do
   sleep 15
   echo "Try again"
 done
-echo "Waiting for Windows image $image:windows-$TRAVIS_TAG-insider-17035"
-until docker run --rm winspector $image:windows-$TRAVIS_TAG-insider-17035
+echo "Waiting for Windows image $image:windows-$TRAVIS_TAG-insider-17046"
+until docker run --rm winspector $image:windows-$TRAVIS_TAG-insider-17046
 do
   sleep 15
   echo "Try again"
@@ -40,7 +40,7 @@ echo "Pushing manifest $image:$TRAVIS_TAG"
   "$image:linux-$TRAVIS_TAG" \
   "$image:windows-$TRAVIS_TAG-2016" \
   "$image:windows-$TRAVIS_TAG-1709" \
-  "$image:windows-$TRAVIS_TAG-insider-17035"
+  "$image:windows-$TRAVIS_TAG-insider-17046"
 ./docker manifest push "$image:$TRAVIS_TAG"
 
 echo "Pushing manifest $image:latest"
@@ -48,5 +48,5 @@ echo "Pushing manifest $image:latest"
   "$image:linux-$TRAVIS_TAG" \
   "$image:windows-$TRAVIS_TAG-2016" \
   "$image:windows-$TRAVIS_TAG-1709" \
-  "$image:windows-$TRAVIS_TAG-insider-17035"
+  "$image:windows-$TRAVIS_TAG-insider-17046"
 ./docker manifest push "$image:latest"
