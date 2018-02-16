@@ -27,26 +27,23 @@ do
 done
 set -e
 
-echo "Downloading docker client with manifest command"
-wget https://6582-88013053-gh.circle-artifacts.com/1/work/build/docker-linux-amd64
-mv docker-linux-amd64 docker
-chmod +x docker
-./docker version
+echo "Enabling docker client experimental features"
+echo '{ "experimental": "enabled "}' > ~/.docker/config.json
 
 set -x
 
 echo "Pushing manifest $image:$TRAVIS_TAG"
-./docker manifest create "$image:$TRAVIS_TAG" \
+docker manifest create "$image:$TRAVIS_TAG" \
   "$image:linux-$TRAVIS_TAG" \
   "$image:windows-$TRAVIS_TAG-2016" \
   "$image:windows-$TRAVIS_TAG-1709" \
-  "$image:windows-$TRAVIS_TAG-insider-17046"
-./docker manifest push "$image:$TRAVIS_TAG"
+  "$image:windows-$TRAVIS_TAG-insider-17093"
+docker manifest push "$image:$TRAVIS_TAG"
 
 echo "Pushing manifest $image:latest"
-./docker manifest create "$image:latest" \
+docker manifest create "$image:latest" \
   "$image:linux-$TRAVIS_TAG" \
   "$image:windows-$TRAVIS_TAG-2016" \
   "$image:windows-$TRAVIS_TAG-1709" \
-  "$image:windows-$TRAVIS_TAG-insider-17046"
-./docker manifest push "$image:latest"
+  "$image:windows-$TRAVIS_TAG-insider-17093"
+docker manifest push "$image:latest"
