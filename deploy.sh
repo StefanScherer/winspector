@@ -19,8 +19,8 @@ do
   sleep 15
   echo "Try again"
 done
-echo "Waiting for Windows image $image:windows-$TRAVIS_TAG-insider-17046"
-until docker run --rm winspector $image:windows-$TRAVIS_TAG-insider-17046
+echo "Waiting for Windows image $image:windows-$TRAVIS_TAG-insider-17093"
+until docker run --rm winspector $image:windows-$TRAVIS_TAG-insider-17093
 do
   sleep 15
   echo "Try again"

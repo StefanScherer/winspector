@@ -19,6 +19,6 @@ rebase-docker-image stefanscherer/winspector:windows-$version-2016 `
   -b microsoft/nanoserver:1709_KB4056892
 
 rebase-docker-image stefanscherer/winspector:windows-$version-2016 `
-  -s microsoft/nanoserver:10.0.14393.2007 `
-  -t stefanscherer/winspector:windows-$version-insider-17046 `
-  -b microsoft/nanoserver-insider:10.0.17046.1000
+  -s microsoft/nanoserver:10.0.14393.2068 `
+  -t stefanscherer/winspector:windows-$version-insider-17093 `
+  -b microsoft/nanoserver-insider:10.0.17093.1000
