@@ -27,9 +27,6 @@ do
 done
 set -e
 
-echo "Enabling docker client experimental features"
-echo '{ "experimental": "enabled "}' > ~/.docker/config.json
-
 set -x
 
 echo "Pushing manifest $image:$TRAVIS_TAG"
