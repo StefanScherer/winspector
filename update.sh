@@ -12,7 +12,7 @@ for image in $images; do
   echo "$sha -> $img:$osversion"
   val=$img:$osversion
   cat work.json | jq ". + { \"$sha\": \"$val\" }" >work$$.json
-  cp work$$.json work.json
+  mv work$$.json work.json
 done
 
 mv work.json knownWindowsLayers.json
