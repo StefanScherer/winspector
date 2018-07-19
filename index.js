@@ -23,19 +23,27 @@ const showUsage = () => {
 };
 
 const parseImageArg = imagename => {
-  let found = imagename.match(/^([^\/:]+)\/([^:]+):(.*)$/);
+  let found = imagename.match(/^([^.\/:]+)\/([^:]+):(.*)$/);
   if (found) {
-    return { org: found[1], image: found[2], tag: found[3] };
+    return { reg: 'registry-1.docker.io', path: `${found[1]}/${found[2]}`, org: found[1], image: found[2], tag: found[3] };
+  }
+  found = imagename.match(/^([^\/:]+)\/([^:]+):(.*)$/);
+  if (found) {
+    return { reg: found[1], path: found[2], org: '', image: found[2], tag: found[3] };
+  }
+  found = imagename.match(/^([^.\/:]+)\/([^:]+)$/);
+  if (found) {
+    return { reg: 'registry-1.docker.io', path: `${found[1]}/${found[2]}`, org: found[1], image: found[2], tag: 'latest' };
   }
   found = imagename.match(/^([^\/:]+)\/([^:]+)$/);
   if (found) {
-    return { org: found[1], image: found[2], tag: 'latest' };
+    return { reg: found[1], path: found[2], org: '', image: found[2], tag: 'latest' };
   }
-  found = imagename.match(/^([^\/:]+):(.*)$/);
+  found = imagename.match(/^([^.\/:]+):(.*)$/);
   if (found) {
-    return { org: 'library', image: found[1], tag: found[2] };
+    return { reg: 'registry-1.docker.io', path: `${found[1]}/${found[2]}`, org: 'library', image: found[1], tag: found[2] };
   }
-  return { org: 'library', image: imagename, tag: 'latest' };
+  return { reg: 'registry-1.docker.io', path: `${found[1]}/${found[2]}`, org: 'library', image: imagename, tag: 'latest' };
 };
 
 const parseArgs = () => {
@@ -94,11 +102,11 @@ const getTokenForSourceImage = callback => {
 
 const getManifestOfSourceImage = callback => {
   console.log(
-    `Retrieving information about source image ${options.images.src.org}/${options.images.src.image}:${options.images.src.tag}`
+    `Retrieving information about source image ${options.images.src.path}:${options.images.src.tag}`
   );
   request(
     {
-      url: `https://registry-1.docker.io/v2/${options.images.src.org}/${options.images.src.image}/manifests/${options.images.src.tag}`,
+      url: `https://${options.images.src.reg}/v2/${options.images.src.path}/manifests/${options.images.src.tag}`,
       auth: {
         bearer
       },
@@ -136,7 +144,7 @@ const getManifestOfSourceImage = callback => {
 const getConfigOfSourceImage = callback => {
   request(
     {
-      url: `https://registry-1.docker.io/v2/${options.images.src.org}/${options.images.src.image}/blobs/${manifestSource.config.digest}`,
+      url: `https://${options.images.src.reg}/v2/${options.images.src.org}/${options.images.src.image}/blobs/${manifestSource.config.digest}`,
       auth: {
         bearer
       },
