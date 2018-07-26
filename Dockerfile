@@ -1,5 +1,5 @@
-ARG node=node:10.6.0-alpine
-ARG target=node:10.6.0-alpine
+ARG node=node:10.7.0-alpine
+ARG target=node:10.7.0-alpine
 
 FROM $node
 
