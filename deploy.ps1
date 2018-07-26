@@ -6,7 +6,7 @@ if (! (Test-Path Env:\APPVEYOR_REPO_TAG_NAME)) {
 }
 
 Write-Host Starting deploy
-docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+"$env:DOCKER_PASS" | docker login --username "$env:DOCKER_USER" --password-stdin
 
 $version = $env:APPVEYOR_REPO_TAG_NAME
 
